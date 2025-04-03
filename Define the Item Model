@@ -1,0 +1,20 @@
+Define the models in models.py
+from django.db import models
+
+class Item(models.Model):
+    name = models.CharField(max_length=255)  # Item name
+    description = models.TextField(blank=True, null=True)  # Optional description
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Price field
+    created_at = models.DateTimeField(auto_now_add=True)  # Auto timestamp
+
+    def __str__(self):
+        return self.name  # String representation
+
+python manage.py makemigrations
+python manage.py migrate
+
+#Create an Admin Panel Entry
+from django.contrib import admin
+from .models import Item
+
+admin.site.register(Item)
