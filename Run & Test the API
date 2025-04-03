@@ -1,0 +1,25 @@
+python manage.py runserver
+Your API is now available at:
+🔹 http://127.0.0.1:8000/api/items/
+
+Test using Postman or curl:
+
+bash
+Copy
+Edit
+curl -X GET http://127.0.0.1:8000/api/items/
+
+#Authentication
+pip install djangorestframework-simplejwt
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+urlpatterns += [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+]
